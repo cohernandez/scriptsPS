@@ -45,7 +45,7 @@ PARAMÈTRES:
 
     -Domain <string>           [OBLIGATOIRE]
         Nom du domaine Active Directory à analyser
-        Exemple: "icsopfr.local", "contoso.com"
+        Exemple: "megacorp.local", "contoso.com"
 
     -OutputFile <string>       [OPTIONNEL]
         Nom du fichier de sortie (défaut: network_analysis.txt)
@@ -66,7 +66,7 @@ PARAMÈTRES:
 EXEMPLES D'UTILISATION:
 
     1. Analyse basique:
-       .\analyze_spn.ps1 -Domain "icsopfr.local"
+       .\analyze_spn.ps1 -Domain "megacorp.local"
 
     2. Analyse avec sauvegarde des SPN:
        .\analyze_spn.ps1 -Domain "contoso.com" -SaveSPN
@@ -78,7 +78,7 @@ EXEMPLES D'UTILISATION:
        .\analyze_spn.ps1 -Domain "corp.domain.com" -OutputFile "rapport_corp.txt"
 
     5. Analyse complète avec toutes les options:
-       .\analyze_spn.ps1 -Domain "icsopfr.local" -SaveSPN -Verbose `
+       .\analyze_spn.ps1 -Domain "megacorp.local" -SaveSPN -Verbose `
                          -MinHostsForNet20 10 -OutputFile "analyse_complete.txt"
 
     6. Modifier le seuil de détection des réseaux /20:
