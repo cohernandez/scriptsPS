@@ -1,4 +1,4 @@
-# Script: ldapsearch3-ng.ps1
+# Script: ldapsearch-ng.ps1
 # Active Directory Security Assessment Tool - Version 3.0
 # Complete LDAP enumeration with vulnerability detection and exploitation guides
 
@@ -107,7 +107,8 @@ function Get-DomainGPOs {
         $gpoPath = $r.Properties["gpcfilesyspath"][0]
         $created = $r.Properties["whencreated"][0]
         
-        Write-Host "`n--- GPO #$gpoCounter: $displayName ---" -ForegroundColor Green
+        # CORRECCION: Usar ${} para delimitar la variable
+        Write-Host "`n--- GPO #${gpoCounter} - $displayName ---" -ForegroundColor Green
         Write-Host "  GUID: $gpoGuid" -ForegroundColor Gray
         Write-Host "  Path: $gpoPath" -ForegroundColor Gray
         Write-Host "  Created: $created" -ForegroundColor Gray
@@ -240,7 +241,8 @@ function Get-ServiceAccounts {
         $uac = $r.Properties["useraccountcontrol"][0]
         $groups = $r.Properties["memberof"]
         
-        Write-Host "`n--- SERVICE #$svcCounter: $sam ---" -ForegroundColor Green
+        # CORRECCION: Usar ${} para delimitar la variable
+        Write-Host "`n--- SERVICE #${svcCounter} - $sam ---" -ForegroundColor Green
         Write-Host "  Description: $desc" -ForegroundColor Gray
         
         if($pwdLastSet) {
@@ -359,7 +361,7 @@ function Get-Vulnerabilities {
         foreach ($r in $results) {
             $sam = $r.Properties["samaccountname"][0]
             $desc = $r.Properties["description"][0]
-            Write-Host "  [!] $sam : $desc" -ForegroundColor Yellow
+            Write-Host "  [!] $sam - $desc" -ForegroundColor Yellow
             $script:CriticalIssues++
             $script:Findings.PasswordInDescription += @{Account=$sam;Description=$desc}
         }
@@ -438,7 +440,7 @@ if($script:Findings.PasswordInDescription.Count -gt 0) {
     Write-Host "[4] PASSWORDS IN DESCRIPTIONS - CRITICAL" -ForegroundColor Red
     Write-Host "    Found: $($script:Findings.PasswordInDescription.Count)" -ForegroundColor Yellow
     foreach ($f in $script:Findings.PasswordInDescription) {
-        Write-Host "      $($f.Account): $($f.Description)" -ForegroundColor Red
+        Write-Host "      $($f.Account) - $($f.Description)" -ForegroundColor Red
     }
     Write-Host ""
 }
